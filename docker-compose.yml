@@ -1,0 +1,36 @@
+version: '2'
+
+networks:
+  nodejs:
+
+services:
+
+  web:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    container_name: nodejs_app
+    volumes:
+      - ./doc-php:/var/www/html
+    depends_on:
+      - db
+    ports:
+      - 9090:9000
+    networks:
+      - nodejs
+
+  db:
+          container_name: mongo_db
+          image: 'bitnami/mongodb:6.0.2-debian-11-r12'
+          restart: always  
+          
+          environment:
+            - ALLOW_EMPTY_PASSWORD=yes 
+            - MONGODB_USERNAME=my_user
+            - MONGODB_PASSWORD=password123
+            - MONGODB_DATABASE=my_database
+          ports:
+           - 3030:27017
+          networks:
+            - nodejs
+  
