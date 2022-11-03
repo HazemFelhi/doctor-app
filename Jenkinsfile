@@ -19,5 +19,10 @@ Pipeline{
         }
         sh 'docker push hazemfelhi/doctor-app'
     } 
+    post {
+		always {
+			sh 'docker logout'
+		}
+	}
 
 }
