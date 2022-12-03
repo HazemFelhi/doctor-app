@@ -4,7 +4,7 @@ Pipeline{
 
     		Stage('SCM checkout') 
     		{
-        		url: 'https://github.com/HazemFelhi/doctor-app.git'
+        		sh 'git clone https://github.com/HazemFelhi/doctor-app.git'
     		}
 
     		Stage('Build and run docker-compose file') 
